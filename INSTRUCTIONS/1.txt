@@ -1,0 +1,55 @@
+PS C:\Users\User\Desktop\Kubernetes> kind create cluster --name devops-ic-batch-04
+Creating cluster "devops-ic-batch-04" ...
+ ✓ Ensuring node image (kindest/node:v1.34.0) 🖼
+ ✓ Preparing nodes 📦
+ ✓ Writing configuration 📜
+ ✓ Starting control-plane 🕹️
+ ✓ Installing CNI 🔌
+ ✓ Installing StorageClass 💾
+Set kubectl context to "kind-devops-ic-batch-04"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-devops-ic-batch-04
+
+Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/quick-start/
+PS C:\Users\User\Desktop\Kubernetes>
+
+
+
+PS C:\Users\User\Desktop\Kubernetes> docker exec -it devops-ic-batch-04-control-plane bash
+root@devops-ic-batch-04-control-plane:/# ps -ef
+UID          PID    PPID  C STIME TTY          TIME CMD
+root           1       0  0 18:43 ?        00:00:00 /sbin/init
+root          91       1  0 18:43 ?        00:00:00 /lib/systemd/systemd-journald
+root         106       1  3 18:43 ?        00:00:11 /usr/local/bin/containerd
+root         285       1  0 18:43 ?        00:00:00 /usr/local/bin/containerd-shim-runc-v2 -namespace k8s.io -id 09a0ac879a9f149a348e61f56e3d3f0e7be394cc6996a8498af70bf2ebae4cb2 -
+root         316       1  0 18:43 ?        00:00:00 /usr/local/bin/containerd-shim-runc-v2 -namespace k8s.io -id d8023bfe83cf20043987a109a0e2c355810c07a8406cbe1dabaeb65b35491223 -
+root         336       1  0 18:43 ?        00:00:00 /usr/local/bin/containerd-shim-runc-v2 -namespace k8s.io -id 7fefe8d7ea434af2332e58e2aabeb12352a80345a02ed42e9f4886065a39ba22 -
+65535        345     285  0 18:43 ?        00:00:00 /pause
+root         383       1  0 18:43 ?        00:00:00 /usr/local/bin/containerd-shim-runc-v2 -namespace k8s.io -id 7ec4cfc4b8c917307e5f6f0ae02d146c8fca7ee96f49b73672d094a6f87ff82c -
+65535        396     316  0 18:43 ?        00:00:00 /pause
+65535        409     336  0 18:43 ?        00:00:00 /pause
+65535        434     383  0 18:43 ?        00:00:00 /pause
+root         531     285  1 18:43 ?        00:00:04 kube-scheduler --authentication-kubeconfig=/etc/kubernetes/scheduler.conf --authorization-kubeconfig=/etc/kubernetes/scheduler.
+root         573     383  2 18:43 ?        00:00:07 kube-controller-manager --allocate-node-cidrs=true --authentication-kubeconfig=/etc/kubernetes/controller-manager.conf --author
+root         587     316  5 18:43 ?        00:00:17 kube-apiserver --advertise-address=172.18.0.3 --allow-privileged=true --authorization-mode=Node,RBAC --client-ca-file=/etc/kube
+root         662     336  2 18:43 ?        00:00:09 etcd --advertise-client-urls=https://172.18.0.3:2379 --cert-file=/etc/kubernetes/pki/etcd/server.crt --client-cert-auth=true --
+root         727       1  2 18:43 ?        00:00:09 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --conf
+root         885       1  0 18:43 ?        00:00:00 /usr/local/bin/containerd-shim-runc-v2 -namespace k8s.io -id 870aff038c45b29cf3e3384754c77c654b43bea4c089b18eea307c984f36767b -
+root         902       1  0 18:43 ?        00:00:00 /usr/local/bin/containerd-shim-runc-v2 -namespace k8s.io -id 19bf5f676aaba8291ad42fe349e1e77a155a36028f5e2723cd0e8c060aa6c7dd -
+65535        939     885  0 18:43 ?        00:00:00 /pause
+65535        944     902  0 18:43 ?        00:00:00 /pause
+root         982     902  0 18:43 ?        00:00:00 /usr/local/bin/kube-proxy --config=/var/lib/kube-proxy/config.conf --hostname-override=devops-ic-batch-04-control-plane        
+root        1162     885  0 18:43 ?        00:00:00 /bin/kindnetd
+root        1331       1  0 18:43 ?        00:00:00 /usr/local/bin/containerd-shim-runc-v2 -namespace k8s.io -id c21d23c00cf2e27c4dbbb9c9c0b498304fcf29ef7b0ddd64a370b142422e89e4 -
+root        1360       1  0 18:43 ?        00:00:00 /usr/local/bin/containerd-shim-runc-v2 -namespace k8s.io -id 51c1c877a181e47be2cf315f86a2821f4f613a8d996973e6d23c1ebaee14001f -
+root        1386       1  0 18:43 ?        00:00:00 /usr/local/bin/containerd-shim-runc-v2 -namespace k8s.io -id f5348c37595c03cdf838f503f5dc7fd762733ab3189e8749e0aa55d10db16ee9 -
+65535       1404    1331  0 18:43 ?        00:00:00 /pause
+65535       1419    1360  0 18:43 ?        00:00:00 /pause
+65535       1431    1386  0 18:43 ?        00:00:00 /pause
+65532       1650    1386  0 18:43 ?        00:00:00 /coredns -conf /etc/coredns/Corefile
+65532       1657    1360  0 18:43 ?        00:00:00 /coredns -conf /etc/coredns/Corefile
+root        1735    1331  0 18:43 ?        00:00:00 local-path-provisioner --debug start --helper-image docker.io/kindest/local-path-helper:v20241212-8ac705d0 --config /etc/config
+root        1825       0  0 18:48 pts/1    00:00:00 bash
+root        1831    1825  0 18:48 pts/1    00:00:00 ps -ef
+root@devops-ic-batch-04-control-plane:/#

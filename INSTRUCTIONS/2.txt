@@ -1,0 +1,19 @@
+
+PS C:\Users\User\Desktop\Kubernetes> kubectl version
+Client Version: v1.34.0
+Kustomize Version: v5.7.1
+Server Version: v1.34.0
+PS C:\Users\User\Desktop\Kubernetes> 
+
+PS C:\Users\User\Desktop\Kubernetes> cat ~/.kube/config
+
+PS C:\Users\User\Desktop\Kubernetes> kubectl config current-context
+kind-devops-ic-batch-04
+PS C:\Users\User\Desktop\Kubernetes> 
+
+PS C:\Users\User\Desktop\Kubernetes> kubectl cluster-info          
+Kubernetes control plane is running at https://127.0.0.1:11588
+CoreDNS is running at https://127.0.0.1:11588/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+PS C:\Users\User\Desktop\Kubernetes> 
