@@ -31,3 +31,9 @@ kind create cluster --name devops-ic-batch-04
 
 ## Kubernaties CLI Tool
 https://kubernetes.io/docs/reference/kubectl/
+
+
+
+## Node ==like==> EC2
+
+## Pod ====> multiple container (docker container)
