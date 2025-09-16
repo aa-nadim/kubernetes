@@ -1,2 +1,3 @@
 https://127.0.0.1:13916/api/v1/nodes?limit=500
 
+kubectl apply -f pod.yaml -v=8
