@@ -1,0 +1,1150 @@
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kubectl get nodes
+NAME                               STATUS   ROLES           AGE   VERSION
+devops-ic-batch-04-control-plane   Ready    control-plane   21h   v1.34.0
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kind get clusters
+devops-ic
+devops-ic-batch-04
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kind delete cluster --name devops-ic-batch-04
+Deleting cluster "devops-ic-batch-04" ...
+Deleted nodes: ["devops-ic-batch-04-control-plane"]
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kind get clusters
+devops-ic
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kind create cluster --config cluster-config.yaml --name devops-ic-batch-04
+Creating cluster "devops-ic-batch-04" ...
+ ✓ Ensuring node image (kindest/node:v1.34.0) 🖼 
+ ✓ Preparing nodes 📦 📦 📦  
+ ✓ Writing configuration 📜 
+ ✓ Starting control-plane 🕹️ 
+ ✓ Installing CNI 🔌 
+ ✓ Installing StorageClass 💾 
+ ✓ Joining worker nodes 🚜 
+Set kubectl context to "kind-devops-ic-batch-04"
+You can now use your cluster with:
+
+kubectl cluster-info --context kind-devops-ic-batch-04
+
+Have a nice day! 👋
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kind get clusters
+devops-ic
+devops-ic-batch-04
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kubectl get nodes
+NAME                               STATUS   ROLES           AGE    VERSION
+devops-ic-batch-04-control-plane   Ready    control-plane   114s   v1.34.0
+devops-ic-batch-04-worker          Ready    <none>          100s   v1.34.0
+devops-ic-batch-04-worker2         Ready    <none>          100s   v1.34.0
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kubectl get nodes -o  json
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Node",
+            "metadata": {
+                "annotations": {
+                    "node.alpha.kubernetes.io/ttl": "0",
+                    "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+                },
+                "creationTimestamp": "2025-09-16T16:44:00Z",
+                "labels": {
+                    "beta.kubernetes.io/arch": "amd64",
+                    "beta.kubernetes.io/os": "linux",
+                    "kubernetes.io/arch": "amd64",
+                    "kubernetes.io/hostname": "devops-ic-batch-04-control-plane",
+                    "kubernetes.io/os": "linux",
+                    "node-role.kubernetes.io/control-plane": "",
+                    "node.kubernetes.io/exclude-from-external-load-balancers": ""
+                },
+                "name": "devops-ic-batch-04-control-plane",
+                "resourceVersion": "780",
+                "uid": "672b18fd-d071-4139-9f4c-068607386e93"
+            },
+            "spec": {
+                "podCIDR": "10.244.0.0/24",
+                "podCIDRs": [
+                    "10.244.0.0/24"
+                ],
+                "providerID": "kind://docker/devops-ic-batch-04/devops-ic-batch-04-control-plane",
+                "taints": [
+                    {
+                        "effect": "NoSchedule",
+                        "key": "node-role.kubernetes.io/control-plane"
+                    }
+                ]
+            },
+            "status": {
+                "addresses": [
+                    {
+                        "address": "172.18.0.5",
+                        "type": "InternalIP"
+                    },
+                    {
+                        "address": "devops-ic-batch-04-control-plane",
+                        "type": "Hostname"
+                    }
+                ],
+                "allocatable": {
+                    "cpu": "12",
+                    "ephemeral-storage": "1055762868Ki",
+                    "hugepages-1Gi": "0",
+                    "hugepages-2Mi": "0",
+                    "memory": "7789776Ki",
+                    "pods": "110"
+                },
+                "capacity": {
+                    "cpu": "12",
+                    "ephemeral-storage": "1055762868Ki",
+                    "hugepages-1Gi": "0",
+                    "hugepages-2Mi": "0",
+                    "memory": "7789776Ki",
+                    "pods": "110"
+                },
+                "conditions": [
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:26Z",
+                        "lastTransitionTime": "2025-09-16T16:43:59Z",
+                        "message": "kubelet has sufficient memory available",
+                        "reason": "KubeletHasSufficientMemory",
+                        "status": "False",
+                        "type": "MemoryPressure"
+                    },
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:26Z",
+                        "lastTransitionTime": "2025-09-16T16:43:59Z",
+                        "message": "kubelet has no disk pressure",
+                        "reason": "KubeletHasNoDiskPressure",
+                        "status": "False",
+                        "type": "DiskPressure"
+                    },
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:26Z",
+                        "lastTransitionTime": "2025-09-16T16:43:59Z",
+                        "message": "kubelet has sufficient PID available",
+                        "reason": "KubeletHasSufficientPID",
+                        "status": "False",
+                        "type": "PIDPressure"
+                    },
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:26Z",
+                        "lastTransitionTime": "2025-09-16T16:44:24Z",
+                        "message": "kubelet is posting ready status",
+                        "reason": "KubeletReady",
+                        "status": "True",
+                        "type": "Ready"
+                    }
+                ],
+                "daemonEndpoints": {
+                    "kubeletEndpoint": {
+                        "Port": 10250
+                    }
+                },
+                "features": {
+                    "supplementalGroupsPolicy": true
+                },
+                "images": [
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-apiserver-amd64:v1.34.0",
+                            "registry.k8s.io/kube-apiserver:v1.34.0"
+                        ],
+                        "sizeBytes": 89044732
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-controller-manager-amd64:v1.34.0",
+                            "registry.k8s.io/kube-controller-manager:v1.34.0"
+                        ],
+                        "sizeBytes": 75998818
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/etcd:3.6.4-0"
+                        ],
+                        "sizeBytes": 74311308
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-proxy-amd64:v1.34.0",
+                            "registry.k8s.io/kube-proxy:v1.34.0"
+                        ],
+                        "sizeBytes": 73135815
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-scheduler-amd64:v1.34.0",
+                            "registry.k8s.io/kube-scheduler:v1.34.0"
+                        ],
+                        "sizeBytes": 53839458
+                    },
+                    {
+                        "names": [
+                            "docker.io/kindest/kindnetd:v20250512-df8de77b"
+                        ],
+                        "sizeBytes": 44375501
+                    },
+                    {
+                        "names": [
+                            "docker.io/kindest/local-path-provisioner:v20250214-acbabc1a"
+                        ],
+                        "sizeBytes": 22540870
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/coredns/coredns:v1.12.1"
+                        ],
+                        "sizeBytes": 22384805
+                    },
+                    {
+                        "names": [
+                            "docker.io/kindest/local-path-helper:v20241212-8ac705d0"
+                        ],
+                        "sizeBytes": 3084671
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/pause:3.10"
+                        ],
+                        "sizeBytes": 320368
+                    }
+                ],
+                "nodeInfo": {
+                    "architecture": "amd64",
+                    "bootID": "f469d0c8-c49a-45b5-9b64-b5a88899e26b",
+                    "containerRuntimeVersion": "containerd://2.1.3",
+                    "kernelVersion": "6.6.87.2-microsoft-standard-WSL2",
+                    "kubeProxyVersion": "",
+                    "kubeletVersion": "v1.34.0",
+                    "machineID": "80280eec3a1749dbb963fa35c48063a2",
+                    "operatingSystem": "linux",
+                    "osImage": "Debian GNU/Linux 12 (bookworm)",
+                    "swap": {
+                        "capacity": 2147483648
+                    },
+                    "systemUUID": "80280eec3a1749dbb963fa35c48063a2"
+                },
+                "runtimeHandlers": [
+                    {
+                        "features": {
+                            "recursiveReadOnlyMounts": true,
+                            "userNamespaces": true
+                        },
+                        "name": "runc"
+                    },
+                    {
+                        "features": {
+                            "recursiveReadOnlyMounts": true,
+                            "userNamespaces": true
+                        },
+                        "name": ""
+                    },
+                    {
+                        "features": {
+                            "recursiveReadOnlyMounts": true,
+                            "userNamespaces": true
+                        },
+                        "name": "test-handler"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Node",
+            "metadata": {
+                "annotations": {
+                    "node.alpha.kubernetes.io/ttl": "0",
+                    "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+                },
+                "creationTimestamp": "2025-09-16T16:44:14Z",
+                "labels": {
+                    "beta.kubernetes.io/arch": "amd64",
+                    "beta.kubernetes.io/os": "linux",
+                    "kubernetes.io/arch": "amd64",
+                    "kubernetes.io/hostname": "devops-ic-batch-04-worker",
+                    "kubernetes.io/os": "linux"
+                },
+                "name": "devops-ic-batch-04-worker",
+                "resourceVersion": "784",
+                "uid": "e1e424d4-8276-4677-bb95-71db265239dc"
+            },
+            "spec": {
+                "podCIDR": "10.244.1.0/24",
+                "podCIDRs": [
+                    "10.244.1.0/24"
+                ],
+                "providerID": "kind://docker/devops-ic-batch-04/devops-ic-batch-04-worker"
+            },
+            "status": {
+                "addresses": [
+                    {
+                        "address": "172.18.0.4",
+                        "type": "InternalIP"
+                    },
+                    {
+                        "address": "devops-ic-batch-04-worker",
+                        "type": "Hostname"
+                    }
+                ],
+                "allocatable": {
+                    "cpu": "12",
+                    "ephemeral-storage": "1055762868Ki",
+                    "hugepages-1Gi": "0",
+                    "hugepages-2Mi": "0",
+                    "memory": "7789776Ki",
+                    "pods": "110"
+                },
+                "capacity": {
+                    "cpu": "12",
+                    "ephemeral-storage": "1055762868Ki",
+                    "hugepages-1Gi": "0",
+                    "hugepages-2Mi": "0",
+                    "memory": "7789776Ki",
+                    "pods": "110"
+                },
+                "conditions": [
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:27Z",
+                        "lastTransitionTime": "2025-09-16T16:44:14Z",
+                        "message": "kubelet has sufficient memory available",
+                        "reason": "KubeletHasSufficientMemory",
+                        "status": "False",
+                        "type": "MemoryPressure"
+                    },
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:27Z",
+                        "lastTransitionTime": "2025-09-16T16:44:14Z",
+                        "message": "kubelet has no disk pressure",
+                        "reason": "KubeletHasNoDiskPressure",
+                        "status": "False",
+                        "type": "DiskPressure"
+                    },
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:27Z",
+                        "lastTransitionTime": "2025-09-16T16:44:14Z",
+                        "message": "kubelet has sufficient PID available",
+                        "reason": "KubeletHasSufficientPID",
+                        "status": "False",
+                        "type": "PIDPressure"
+                    },
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:27Z",
+                        "lastTransitionTime": "2025-09-16T16:44:30Z",
+                        "message": "kubelet is posting ready status",
+                        "reason": "KubeletReady",
+                        "status": "True",
+                        "type": "Ready"
+                    }
+                ],
+                "daemonEndpoints": {
+                    "kubeletEndpoint": {
+                        "Port": 10250
+                    }
+                },
+                "features": {
+                    "supplementalGroupsPolicy": true
+                },
+                "images": [
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-apiserver-amd64:v1.34.0",
+                            "registry.k8s.io/kube-apiserver:v1.34.0"
+                        ],
+                        "sizeBytes": 89044732
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-controller-manager-amd64:v1.34.0",
+                            "registry.k8s.io/kube-controller-manager:v1.34.0"
+                        ],
+                        "sizeBytes": 75998818
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/etcd:3.6.4-0"
+                        ],
+                        "sizeBytes": 74311308
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-proxy-amd64:v1.34.0",
+                            "registry.k8s.io/kube-proxy:v1.34.0"
+                        ],
+                        "sizeBytes": 73135815
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-scheduler-amd64:v1.34.0",
+                            "registry.k8s.io/kube-scheduler:v1.34.0"
+                        ],
+                        "sizeBytes": 53839458
+                    },
+                    {
+                        "names": [
+                            "docker.io/kindest/kindnetd:v20250512-df8de77b"
+                        ],
+                        "sizeBytes": 44375501
+                    },
+                    {
+                        "names": [
+                            "docker.io/kindest/local-path-provisioner:v20250214-acbabc1a"
+                        ],
+                        "sizeBytes": 22540870
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/coredns/coredns:v1.12.1"
+                        ],
+                        "sizeBytes": 22384805
+                    },
+                    {
+                        "names": [
+                            "docker.io/kindest/local-path-helper:v20241212-8ac705d0"
+                        ],
+                        "sizeBytes": 3084671
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/pause:3.10"
+                        ],
+                        "sizeBytes": 320368
+                    }
+                ],
+                "nodeInfo": {
+                    "architecture": "amd64",
+                    "bootID": "f469d0c8-c49a-45b5-9b64-b5a88899e26b",
+                    "containerRuntimeVersion": "containerd://2.1.3",
+                    "kernelVersion": "6.6.87.2-microsoft-standard-WSL2",
+                    "kubeProxyVersion": "",
+                    "kubeletVersion": "v1.34.0",
+                    "machineID": "b5e6ae579122466bac583d3cb40fcc21",
+                    "operatingSystem": "linux",
+                    "osImage": "Debian GNU/Linux 12 (bookworm)",
+                    "swap": {
+                        "capacity": 2147483648
+                    },
+                    "systemUUID": "b5e6ae579122466bac583d3cb40fcc21"
+                },
+                "runtimeHandlers": [
+                    {
+                        "features": {
+                            "recursiveReadOnlyMounts": true,
+                            "userNamespaces": true
+                        },
+                        "name": "runc"
+                    },
+                    {
+                        "features": {
+                            "recursiveReadOnlyMounts": true,
+                            "userNamespaces": true
+                        },
+                        "name": ""
+                    },
+                    {
+                        "features": {
+                            "recursiveReadOnlyMounts": true,
+                            "userNamespaces": true
+                        },
+                        "name": "test-handler"
+                    }
+                ]
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Node",
+            "metadata": {
+                "annotations": {
+                    "node.alpha.kubernetes.io/ttl": "0",
+                    "volumes.kubernetes.io/controller-managed-attach-detach": "true"
+                },
+                "creationTimestamp": "2025-09-16T16:44:14Z",
+                "labels": {
+                    "beta.kubernetes.io/arch": "amd64",
+                    "beta.kubernetes.io/os": "linux",
+                    "kubernetes.io/arch": "amd64",
+                    "kubernetes.io/hostname": "devops-ic-batch-04-worker2",
+                    "kubernetes.io/os": "linux"
+                },
+                "name": "devops-ic-batch-04-worker2",
+                "resourceVersion": "768",
+                "uid": "72a76a40-a989-4814-b7c7-8575b52543b9"
+            },
+            "spec": {
+                "podCIDR": "10.244.2.0/24",
+                "podCIDRs": [
+                    "10.244.2.0/24"
+                ],
+                "providerID": "kind://docker/devops-ic-batch-04/devops-ic-batch-04-worker2"
+            },
+            "status": {
+                "addresses": [
+                    {
+                        "address": "172.18.0.2",
+                        "type": "InternalIP"
+                    },
+                    {
+                        "address": "devops-ic-batch-04-worker2",
+                        "type": "Hostname"
+                    }
+                ],
+                "allocatable": {
+                    "cpu": "12",
+                    "ephemeral-storage": "1055762868Ki",
+                    "hugepages-1Gi": "0",
+                    "hugepages-2Mi": "0",
+                    "memory": "7789776Ki",
+                    "pods": "110"
+                },
+                "capacity": {
+                    "cpu": "12",
+                    "ephemeral-storage": "1055762868Ki",
+                    "hugepages-1Gi": "0",
+                    "hugepages-2Mi": "0",
+                    "memory": "7789776Ki",
+                    "pods": "110"
+                },
+                "conditions": [
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:17Z",
+                        "lastTransitionTime": "2025-09-16T16:44:14Z",
+                        "message": "kubelet has sufficient memory available",
+                        "reason": "KubeletHasSufficientMemory",
+                        "status": "False",
+                        "type": "MemoryPressure"
+                    },
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:17Z",
+                        "lastTransitionTime": "2025-09-16T16:44:14Z",
+                        "message": "kubelet has no disk pressure",
+                        "reason": "KubeletHasNoDiskPressure",
+                        "status": "False",
+                        "type": "DiskPressure"
+                    },
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:17Z",
+                        "lastTransitionTime": "2025-09-16T16:44:14Z",
+                        "message": "kubelet has sufficient PID available",
+                        "reason": "KubeletHasSufficientPID",
+                        "status": "False",
+                        "type": "PIDPressure"
+                    },
+                    {
+                        "lastHeartbeatTime": "2025-09-16T16:46:17Z",
+                        "lastTransitionTime": "2025-09-16T16:44:30Z",
+                        "message": "kubelet is posting ready status",
+                        "reason": "KubeletReady",
+                        "status": "True",
+                        "type": "Ready"
+                    }
+                ],
+                "daemonEndpoints": {
+                    "kubeletEndpoint": {
+                        "Port": 10250
+                    }
+                },
+                "features": {
+                    "supplementalGroupsPolicy": true
+                },
+                "images": [
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-apiserver-amd64:v1.34.0",
+                            "registry.k8s.io/kube-apiserver:v1.34.0"
+                        ],
+                        "sizeBytes": 89044732
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-controller-manager-amd64:v1.34.0",
+                            "registry.k8s.io/kube-controller-manager:v1.34.0"
+                        ],
+                        "sizeBytes": 75998818
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/etcd:3.6.4-0"
+                        ],
+                        "sizeBytes": 74311308
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-proxy-amd64:v1.34.0",
+                            "registry.k8s.io/kube-proxy:v1.34.0"
+                        ],
+                        "sizeBytes": 73135815
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/kube-scheduler-amd64:v1.34.0",
+                            "registry.k8s.io/kube-scheduler:v1.34.0"
+                        ],
+                        "sizeBytes": 53839458
+                    },
+                    {
+                        "names": [
+                            "docker.io/kindest/kindnetd:v20250512-df8de77b"
+                        ],
+                        "sizeBytes": 44375501
+                    },
+                    {
+                        "names": [
+                            "docker.io/kindest/local-path-provisioner:v20250214-acbabc1a"
+                        ],
+                        "sizeBytes": 22540870
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/coredns/coredns:v1.12.1"
+                        ],
+                        "sizeBytes": 22384805
+                    },
+                    {
+                        "names": [
+                            "docker.io/kindest/local-path-helper:v20241212-8ac705d0"
+                        ],
+                        "sizeBytes": 3084671
+                    },
+                    {
+                        "names": [
+                            "registry.k8s.io/pause:3.10"
+                        ],
+                        "sizeBytes": 320368
+                    }
+                ],
+                "nodeInfo": {
+                    "architecture": "amd64",
+                    "bootID": "f469d0c8-c49a-45b5-9b64-b5a88899e26b",
+                    "containerRuntimeVersion": "containerd://2.1.3",
+                    "kernelVersion": "6.6.87.2-microsoft-standard-WSL2",
+                    "kubeProxyVersion": "",
+                    "kubeletVersion": "v1.34.0",
+                    "machineID": "8e608d6a00ac44ce849f3ff03656ebd6",
+                    "operatingSystem": "linux",
+                    "osImage": "Debian GNU/Linux 12 (bookworm)",
+                    "swap": {
+                        "capacity": 2147483648
+                    },
+                    "systemUUID": "8e608d6a00ac44ce849f3ff03656ebd6"
+                },
+                "runtimeHandlers": [
+                    {
+                        "features": {
+                            "recursiveReadOnlyMounts": true,
+                            "userNamespaces": true
+                        },
+                        "name": "runc"
+                    },
+                    {
+                        "features": {
+                            "recursiveReadOnlyMounts": true,
+                            "userNamespaces": true
+                        },
+                        "name": ""
+                    },
+                    {
+                        "features": {
+                            "recursiveReadOnlyMounts": true,
+                            "userNamespaces": true
+                        },
+                        "name": "test-handler"
+                    }
+                ]
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kubectl get nodes -o yaml
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Node
+  metadata:
+    annotations:
+      node.alpha.kubernetes.io/ttl: "0"
+      volumes.kubernetes.io/controller-managed-attach-detach: "true"
+    creationTimestamp: "2025-09-16T16:44:00Z"
+    labels:
+      beta.kubernetes.io/arch: amd64
+      beta.kubernetes.io/os: linux
+      kubernetes.io/arch: amd64
+      kubernetes.io/hostname: devops-ic-batch-04-control-plane
+      kubernetes.io/os: linux
+      node-role.kubernetes.io/control-plane: ""
+      node.kubernetes.io/exclude-from-external-load-balancers: ""
+    name: devops-ic-batch-04-control-plane
+    resourceVersion: "862"
+    uid: 672b18fd-d071-4139-9f4c-068607386e93
+  spec:
+    podCIDR: 10.244.0.0/24
+    podCIDRs:
+    - 10.244.0.0/24
+    providerID: kind://docker/devops-ic-batch-04/devops-ic-batch-04-control-plane
+    taints:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/control-plane
+  status:
+    addresses:
+    - address: 172.18.0.5
+      type: InternalIP
+    - address: devops-ic-batch-04-control-plane
+      type: Hostname
+    allocatable:
+      cpu: "12"
+      ephemeral-storage: 1055762868Ki
+      hugepages-1Gi: "0"
+      hugepages-2Mi: "0"
+      memory: 7789776Ki
+      pods: "110"
+    capacity:
+      cpu: "12"
+      ephemeral-storage: 1055762868Ki
+      hugepages-1Gi: "0"
+      hugepages-2Mi: "0"
+      memory: 7789776Ki
+      pods: "110"
+    conditions:
+    - lastHeartbeatTime: "2025-09-16T16:47:18Z"
+      lastTransitionTime: "2025-09-16T16:43:59Z"
+      message: kubelet has sufficient memory available
+      reason: KubeletHasSufficientMemory
+      status: "False"
+      type: MemoryPressure
+    - lastHeartbeatTime: "2025-09-16T16:47:18Z"
+      lastTransitionTime: "2025-09-16T16:43:59Z"
+      message: kubelet has no disk pressure
+      reason: KubeletHasNoDiskPressure
+      status: "False"
+      type: DiskPressure
+    - lastHeartbeatTime: "2025-09-16T16:47:18Z"
+      lastTransitionTime: "2025-09-16T16:43:59Z"
+      message: kubelet has sufficient PID available
+      reason: KubeletHasSufficientPID
+      status: "False"
+      type: PIDPressure
+    - lastHeartbeatTime: "2025-09-16T16:47:18Z"
+      lastTransitionTime: "2025-09-16T16:44:24Z"
+      message: kubelet is posting ready status
+      reason: KubeletReady
+      status: "True"
+      type: Ready
+    daemonEndpoints:
+      kubeletEndpoint:
+        Port: 10250
+    features:
+      supplementalGroupsPolicy: true
+    images:
+    - names:
+      - registry.k8s.io/kube-apiserver-amd64:v1.34.0
+      - registry.k8s.io/kube-apiserver:v1.34.0
+      sizeBytes: 89044732
+    - names:
+      - registry.k8s.io/kube-controller-manager-amd64:v1.34.0
+      - registry.k8s.io/kube-controller-manager:v1.34.0
+      sizeBytes: 75998818
+    - names:
+      - registry.k8s.io/etcd:3.6.4-0
+      sizeBytes: 74311308
+    - names:
+      - registry.k8s.io/kube-proxy-amd64:v1.34.0
+      - registry.k8s.io/kube-proxy:v1.34.0
+      sizeBytes: 73135815
+    - names:
+      - registry.k8s.io/kube-scheduler-amd64:v1.34.0
+      - registry.k8s.io/kube-scheduler:v1.34.0
+      sizeBytes: 53839458
+    - names:
+      - docker.io/kindest/kindnetd:v20250512-df8de77b
+      sizeBytes: 44375501
+    - names:
+      - docker.io/kindest/local-path-provisioner:v20250214-acbabc1a
+      sizeBytes: 22540870
+    - names:
+      - registry.k8s.io/coredns/coredns:v1.12.1
+      sizeBytes: 22384805
+    - names:
+      - docker.io/kindest/local-path-helper:v20241212-8ac705d0
+      sizeBytes: 3084671
+    - names:
+      - registry.k8s.io/pause:3.10
+      sizeBytes: 320368
+    nodeInfo:
+      architecture: amd64
+      bootID: f469d0c8-c49a-45b5-9b64-b5a88899e26b
+      containerRuntimeVersion: containerd://2.1.3
+      kernelVersion: 6.6.87.2-microsoft-standard-WSL2
+      kubeProxyVersion: ""
+      kubeletVersion: v1.34.0
+      machineID: 80280eec3a1749dbb963fa35c48063a2
+      operatingSystem: linux
+      osImage: Debian GNU/Linux 12 (bookworm)
+      swap:
+        capacity: 2147483648
+      systemUUID: 80280eec3a1749dbb963fa35c48063a2
+    runtimeHandlers:
+    - features:
+        recursiveReadOnlyMounts: true
+        userNamespaces: true
+      name: ""
+    - features:
+        recursiveReadOnlyMounts: true
+        userNamespaces: true
+      name: test-handler
+    - features:
+        recursiveReadOnlyMounts: true
+        userNamespaces: true
+      name: runc
+- apiVersion: v1
+  kind: Node
+  metadata:
+    annotations:
+      node.alpha.kubernetes.io/ttl: "0"
+      volumes.kubernetes.io/controller-managed-attach-detach: "true"
+    creationTimestamp: "2025-09-16T16:44:14Z"
+    labels:
+      beta.kubernetes.io/arch: amd64
+      beta.kubernetes.io/os: linux
+      kubernetes.io/arch: amd64
+      kubernetes.io/hostname: devops-ic-batch-04-worker
+      kubernetes.io/os: linux
+    name: devops-ic-batch-04-worker
+    resourceVersion: "848"
+    uid: e1e424d4-8276-4677-bb95-71db265239dc
+  spec:
+    podCIDR: 10.244.1.0/24
+    podCIDRs:
+    - 10.244.1.0/24
+    providerID: kind://docker/devops-ic-batch-04/devops-ic-batch-04-worker
+  status:
+    addresses:
+    - address: 172.18.0.4
+      type: InternalIP
+    - address: devops-ic-batch-04-worker
+      type: Hostname
+    allocatable:
+      cpu: "12"
+      ephemeral-storage: 1055762868Ki
+      hugepages-1Gi: "0"
+      hugepages-2Mi: "0"
+      memory: 7789776Ki
+      pods: "110"
+    capacity:
+      cpu: "12"
+      ephemeral-storage: 1055762868Ki
+      hugepages-1Gi: "0"
+      hugepages-2Mi: "0"
+      memory: 7789776Ki
+      pods: "110"
+    conditions:
+    - lastHeartbeatTime: "2025-09-16T16:47:08Z"
+      lastTransitionTime: "2025-09-16T16:44:14Z"
+      message: kubelet has sufficient memory available
+      reason: KubeletHasSufficientMemory
+      status: "False"
+      type: MemoryPressure
+    - lastHeartbeatTime: "2025-09-16T16:47:08Z"
+      lastTransitionTime: "2025-09-16T16:44:14Z"
+      message: kubelet has no disk pressure
+      reason: KubeletHasNoDiskPressure
+      status: "False"
+      type: DiskPressure
+    - lastHeartbeatTime: "2025-09-16T16:47:08Z"
+      lastTransitionTime: "2025-09-16T16:44:14Z"
+      message: kubelet has sufficient PID available
+      reason: KubeletHasSufficientPID
+      status: "False"
+      type: PIDPressure
+    - lastHeartbeatTime: "2025-09-16T16:47:08Z"
+      lastTransitionTime: "2025-09-16T16:44:30Z"
+      message: kubelet is posting ready status
+      reason: KubeletReady
+      status: "True"
+      type: Ready
+    daemonEndpoints:
+      kubeletEndpoint:
+        Port: 10250
+    features:
+      supplementalGroupsPolicy: true
+    images:
+    - names:
+      - registry.k8s.io/kube-apiserver-amd64:v1.34.0
+      - registry.k8s.io/kube-apiserver:v1.34.0
+      sizeBytes: 89044732
+    - names:
+      - registry.k8s.io/kube-controller-manager-amd64:v1.34.0
+      - registry.k8s.io/kube-controller-manager:v1.34.0
+      sizeBytes: 75998818
+    - names:
+      - registry.k8s.io/etcd:3.6.4-0
+      sizeBytes: 74311308
+    - names:
+      - registry.k8s.io/kube-proxy-amd64:v1.34.0
+      - registry.k8s.io/kube-proxy:v1.34.0
+      sizeBytes: 73135815
+    - names:
+      - registry.k8s.io/kube-scheduler-amd64:v1.34.0
+      - registry.k8s.io/kube-scheduler:v1.34.0
+      sizeBytes: 53839458
+    - names:
+      - docker.io/kindest/kindnetd:v20250512-df8de77b
+      sizeBytes: 44375501
+    - names:
+      - docker.io/kindest/local-path-provisioner:v20250214-acbabc1a
+      sizeBytes: 22540870
+    - names:
+      - registry.k8s.io/coredns/coredns:v1.12.1
+      sizeBytes: 22384805
+    - names:
+      - docker.io/kindest/local-path-helper:v20241212-8ac705d0
+      sizeBytes: 3084671
+    - names:
+      - registry.k8s.io/pause:3.10
+      sizeBytes: 320368
+    nodeInfo:
+      architecture: amd64
+      bootID: f469d0c8-c49a-45b5-9b64-b5a88899e26b
+      containerRuntimeVersion: containerd://2.1.3
+      kernelVersion: 6.6.87.2-microsoft-standard-WSL2
+      kubeProxyVersion: ""
+      kubeletVersion: v1.34.0
+      machineID: b5e6ae579122466bac583d3cb40fcc21
+      operatingSystem: linux
+      osImage: Debian GNU/Linux 12 (bookworm)
+      swap:
+        capacity: 2147483648
+      systemUUID: b5e6ae579122466bac583d3cb40fcc21
+    runtimeHandlers:
+    - features:
+        recursiveReadOnlyMounts: true
+        userNamespaces: true
+      name: test-handler
+    - features:
+        recursiveReadOnlyMounts: true
+        userNamespaces: true
+      name: runc
+    - features:
+        recursiveReadOnlyMounts: true
+        userNamespaces: true
+      name: ""
+- apiVersion: v1
+  kind: Node
+  metadata:
+    annotations:
+      node.alpha.kubernetes.io/ttl: "0"
+      volumes.kubernetes.io/controller-managed-attach-detach: "true"
+    creationTimestamp: "2025-09-16T16:44:14Z"
+    labels:
+      beta.kubernetes.io/arch: amd64
+      beta.kubernetes.io/os: linux
+      kubernetes.io/arch: amd64
+      kubernetes.io/hostname: devops-ic-batch-04-worker2
+      kubernetes.io/os: linux
+    name: devops-ic-batch-04-worker2
+    resourceVersion: "768"
+    uid: 72a76a40-a989-4814-b7c7-8575b52543b9
+  spec:
+    podCIDR: 10.244.2.0/24
+    podCIDRs:
+    - 10.244.2.0/24
+    providerID: kind://docker/devops-ic-batch-04/devops-ic-batch-04-worker2
+  status:
+    addresses:
+    - address: 172.18.0.2
+      type: InternalIP
+    - address: devops-ic-batch-04-worker2
+      type: Hostname
+    allocatable:
+      cpu: "12"
+      ephemeral-storage: 1055762868Ki
+      hugepages-1Gi: "0"
+      hugepages-2Mi: "0"
+      memory: 7789776Ki
+      pods: "110"
+    capacity:
+      cpu: "12"
+      ephemeral-storage: 1055762868Ki
+      hugepages-1Gi: "0"
+      hugepages-2Mi: "0"
+      memory: 7789776Ki
+      pods: "110"
+    conditions:
+    - lastHeartbeatTime: "2025-09-16T16:46:17Z"
+      lastTransitionTime: "2025-09-16T16:44:14Z"
+      message: kubelet has sufficient memory available
+      reason: KubeletHasSufficientMemory
+      status: "False"
+      type: MemoryPressure
+    - lastHeartbeatTime: "2025-09-16T16:46:17Z"
+      lastTransitionTime: "2025-09-16T16:44:14Z"
+      message: kubelet has no disk pressure
+      reason: KubeletHasNoDiskPressure
+      status: "False"
+      type: DiskPressure
+    - lastHeartbeatTime: "2025-09-16T16:46:17Z"
+      lastTransitionTime: "2025-09-16T16:44:14Z"
+      message: kubelet has sufficient PID available
+      reason: KubeletHasSufficientPID
+      status: "False"
+      type: PIDPressure
+    - lastHeartbeatTime: "2025-09-16T16:46:17Z"
+      lastTransitionTime: "2025-09-16T16:44:30Z"
+      message: kubelet is posting ready status
+      reason: KubeletReady
+      status: "True"
+      type: Ready
+    daemonEndpoints:
+      kubeletEndpoint:
+        Port: 10250
+    features:
+      supplementalGroupsPolicy: true
+    images:
+    - names:
+      - registry.k8s.io/kube-apiserver-amd64:v1.34.0
+      - registry.k8s.io/kube-apiserver:v1.34.0
+      sizeBytes: 89044732
+    - names:
+      - registry.k8s.io/kube-controller-manager-amd64:v1.34.0
+      - registry.k8s.io/kube-controller-manager:v1.34.0
+      sizeBytes: 75998818
+    - names:
+      - registry.k8s.io/etcd:3.6.4-0
+      sizeBytes: 74311308
+    - names:
+      - registry.k8s.io/kube-proxy-amd64:v1.34.0
+      - registry.k8s.io/kube-proxy:v1.34.0
+      sizeBytes: 73135815
+    - names:
+      - registry.k8s.io/kube-scheduler-amd64:v1.34.0
+      - registry.k8s.io/kube-scheduler:v1.34.0
+      sizeBytes: 53839458
+    - names:
+      - docker.io/kindest/kindnetd:v20250512-df8de77b
+      sizeBytes: 44375501
+    - names:
+      - docker.io/kindest/local-path-provisioner:v20250214-acbabc1a
+      sizeBytes: 22540870
+    - names:
+      - registry.k8s.io/coredns/coredns:v1.12.1
+      sizeBytes: 22384805
+    - names:
+      - docker.io/kindest/local-path-helper:v20241212-8ac705d0
+      sizeBytes: 3084671
+    - names:
+      - registry.k8s.io/pause:3.10
+      sizeBytes: 320368
+    nodeInfo:
+      architecture: amd64
+      bootID: f469d0c8-c49a-45b5-9b64-b5a88899e26b
+      containerRuntimeVersion: containerd://2.1.3
+      kernelVersion: 6.6.87.2-microsoft-standard-WSL2
+      kubeProxyVersion: ""
+      kubeletVersion: v1.34.0
+      machineID: 8e608d6a00ac44ce849f3ff03656ebd6
+      operatingSystem: linux
+      osImage: Debian GNU/Linux 12 (bookworm)
+      swap:
+        capacity: 2147483648
+      systemUUID: 8e608d6a00ac44ce849f3ff03656ebd6
+    runtimeHandlers:
+    - features:
+        recursiveReadOnlyMounts: true
+        userNamespaces: true
+      name: runc
+    - features:
+        recursiveReadOnlyMounts: true
+        userNamespaces: true
+      name: ""
+    - features:
+        recursiveReadOnlyMounts: true
+        userNamespaces: true
+      name: test-handler
+kind: List
+metadata:
+  resourceVersion: ""
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kubectl get nodes -o wide
+NAME                               STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION                     CONTAINER-RUNTIME 
+devops-ic-batch-04-control-plane   Ready    control-plane   3m55s   v1.34.0   172.18.0.5    <none>        Debian GNU/Linux 12 (bookworm)   6.6.87.2-microsoft-standard-WSL2   containerd://2.1.3
+devops-ic-batch-04-worker          Ready    <none>          3m41s   v1.34.0   172.18.0.4    <none>        Debian GNU/Linux 12 (bookworm)   6.6.87.2-microsoft-standard-WSL2   containerd://2.1.3
+devops-ic-batch-04-worker2         Ready    <none>          3m41s   v1.34.0   172.18.0.2    <none>        Debian GNU/Linux 12 (bookworm)   6.6.87.2-microsoft-standard-WSL2   containerd://2.1.3
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kubectl get nodes -o wide -v=8
+I0916 22:50:09.014889   19400 cmd.go:527] kubectl command headers turned on
+I0916 22:50:09.062475   19400 loader.go:402] Config loaded from file:  C:\Users\User\.kube\config
+I0916 22:50:09.067713   19400 envvar.go:172] "Feature gate default state" feature="WatchListClient" enabled=false
+I0916 22:50:09.067713   19400 envvar.go:172] "Feature gate default state" feature="ClientsAllowCBOR" enabled=false
+I0916 22:50:09.067713   19400 envvar.go:172] "Feature gate default state" feature="ClientsPreferCBOR" enabled=false
+I0916 22:50:09.068247   19400 envvar.go:172] "Feature gate default state" feature="InOrderInformers" enabled=true
+I0916 22:50:09.068247   19400 envvar.go:172] "Feature gate default state" feature="InformerResourceVersion" enabled=false
+I0916 22:50:09.084583   19400 helper.go:113] "Request Body" body=""
+I0916 22:50:09.085124   19400 round_trippers.go:527] "Request" verb="GET" url="https://127.0.0.1:13916/api/v1/nodes?limit=500" headers=<
+        Accept: application/json;as=Table;v=v1;g=meta.k8s.io,application/json;as=Table;v=v1beta1;g=meta.k8s.io,application/json
+        User-Agent: kubectl.exe/v1.34.0 (windows/amd64) kubernetes/f28b4c9
+ >
+I0916 22:50:09.102801   19400 round_trippers.go:632] "Response" status="200 OK" headers=<
+        Audit-Id: a0a3d95c-e2f5-4d0a-ba1b-fe17c7ac78a6
+        X-Kubernetes-Pf-Prioritylevel-Uid: be029636-9789-4e16-bd43-511619008920
+ > milliseconds=17
+I0916 22:50:09.104018   19400 helper.go:113] "Response Body" body="{\"kind\":\"Table\",\"apiVersion\":\"meta.k8s.io/v1\",\"metadata\":{\"resourceVersion\":\"1132\"},\"columnDefinitions\":[{\"name\":\"Name\",\"type\":\"string\",\"format\":\"name\",\"description\":\"Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names\",\"priority\":0},{\"name\":\"Status\",\"type\":\"string\",\"format\":\"\",\"description\":\"The status of the node\",\"priority\":0},{\"name\":\"Roles\",\"type\":\"string\",\"format\":\"\",\"description\":\"The roles of the node\",\"priority\":0},{\"name\":\"Age\",\"type\":\"string\",\"format\":\"\",\"description\":\"CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is repr [truncated 8624 chars]"
+NAME                               STATUS   ROLES           AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION                     CONTAINER-RUNTIME 
+devops-ic-batch-04-control-plane   Ready    control-plane   6m9s    v1.34.0   172.18.0.5    <none>        Debian GNU/Linux 12 (bookworm)   6.6.87.2-microsoft-standard-WSL2   containerd://2.1.3
+devops-ic-batch-04-worker          Ready    <none>          5m55s   v1.34.0   172.18.0.4    <none>        Debian GNU/Linux 12 (bookworm)   6.6.87.2-microsoft-standard-WSL2   containerd://2.1.3
+devops-ic-batch-04-worker2         Ready    <none>          5m55s   v1.34.0   172.18.0.2    <none>        Debian GNU/Linux 12 (bookworm)   6.6.87.2-microsoft-standard-WSL2   containerd://2.1.3
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ kubectl get nodes -v=8
+I0916 22:50:44.444199   16196 cmd.go:527] kubectl command headers turned on
+I0916 22:50:44.484305   16196 loader.go:402] Config loaded from file:  C:\Users\User\.kube\config
+I0916 22:50:44.486210   16196 envvar.go:172] "Feature gate default state" feature="WatchListClient" enabled=false
+I0916 22:50:44.486210   16196 envvar.go:172] "Feature gate default state" feature="ClientsAllowCBOR" enabled=false
+I0916 22:50:44.486210   16196 envvar.go:172] "Feature gate default state" feature="ClientsPreferCBOR" enabled=false
+I0916 22:50:44.486210   16196 envvar.go:172] "Feature gate default state" feature="InOrderInformers" enabled=true
+I0916 22:50:44.486210   16196 envvar.go:172] "Feature gate default state" feature="InformerResourceVersion" enabled=false
+I0916 22:50:44.500851   16196 helper.go:113] "Request Body" body=""
+I0916 22:50:44.501394   16196 round_trippers.go:527] "Request" verb="GET" url="https://127.0.0.1:13916/api/v1/nodes?limit=500" headers=<
+        Accept: application/json;as=Table;v=v1;g=meta.k8s.io,application/json;as=Table;v=v1beta1;g=meta.k8s.io,application/json
+        User-Agent: kubectl.exe/v1.34.0 (windows/amd64) kubernetes/f28b4c9
+ >
+I0916 22:50:44.520192   16196 round_trippers.go:632] "Response" status="200 OK" headers=<
+        Audit-Id: 02bc6bac-d2a4-4b85-8823-7703dda09afe
+        Cache-Control: no-cache, private
+        Content-Type: application/json
+        Date: Tue, 16 Sep 2025 16:50:44 GMT
+        X-Kubernetes-Pf-Flowschema-Uid: f9bc49d4-dc25-44a2-9741-d55ca60722e1
+        X-Kubernetes-Pf-Prioritylevel-Uid: be029636-9789-4e16-bd43-511619008920
+ > milliseconds=18
+I0916 22:50:44.528302   16196 helper.go:113] "Response Body" body="{\"kind\":\"Table\",\"apiVersion\":\"meta.k8s.io/v1\",\"metadata\":{\"resourceVersion\":\"1191\"},\"columnDefinitions\":[{\"name\":\"Name\",\"type\":\"string\",\"format\":\"name\",\"description\":\"Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names\",\"priority\":0},{\"name\":\"Status\",\"type\":\"string\",\"format\":\"\",\"description\":\"The status of the node\",\"priority\":0},{\"name\":\"Roles\",\"type\":\"string\",\"format\":\"\",\"description\":\"The roles of the node\",\"priority\":0},{\"name\":\"Age\",\"type\":\"string\",\"format\":\"\",\"description\":\"CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is repr [truncated 8625 chars]"
+NAME                               STATUS   ROLES           AGE     VERSION
+devops-ic-batch-04-control-plane   Ready    control-plane   6m44s   v1.34.0
+devops-ic-batch-04-worker          Ready    <none>          6m30s   v1.34.0
+devops-ic-batch-04-worker2         Ready    <none>          6m30s   v1.34.0
+
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+
+
+
+
+
+
