@@ -6,11 +6,11 @@ metadata:
   annotations: {}
 spec:
   strategy:
-    type: Recreate
-    # type: RollingUpdate
-    # rollingUpdate:
-    #   maxUnavailable: 23%
-    #   maxSurge: 25%
+    # type: Recreate
+    type: RollingUpdate  # Recreate
+    rollingUpdate:
+      maxUnavailable: 23%
+      maxSurge: 50% # ceil(current pod * 50%) = extra number of pods
   replicas: 3
   selector:
     matchLabels:         
