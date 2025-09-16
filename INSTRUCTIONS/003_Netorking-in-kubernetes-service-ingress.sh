@@ -19,8 +19,16 @@ kubectl get namespaces
 
 # ========================================================
 kubectl get pods --namespace kube-system
+
+# ========================================================
+kubectl get pods --namespace kube-system -o wide | grep kindnet
+
+
 # ========================================================
 kubectl get daemonset --namespace kube-system
 
+# ========================================================
+kubectl apply -f daemonset.yaml 
 
-
+# ========================================================
+kubectl logs -f kindnet-4p925  --namespace kube-system

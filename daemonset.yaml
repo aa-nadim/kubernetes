@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-daemonset
+  labels: {}
+  annotations: {}
+spec:
+  selector:
+    matchLabels:         
+      app: nginx-daemonset
+  template:
+    metadata:
+      labels:
+        app: nginx-daemonset
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.28
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          env:
+          - name: APPLICATION_ENVIRONMENT
+            value: staging
+      restartPolicy: Always
