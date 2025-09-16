@@ -29,3 +29,11 @@ kubectl rollout undo deployment/nginx-deployment
 # ===========================================
 
 kubectl set image deployment/nginx-deployment nginx=nginx:1.27
+
+# ===========================================
+# when i ran
+kubectl apply -f deployment.yaml 
+# after running , created 3 kind of Resources 
+# 1st -> Deployment
+# 2nd -> ReplicaSet controle by Deployment
+# 3rd -> Pod controle by ReplicaSet
