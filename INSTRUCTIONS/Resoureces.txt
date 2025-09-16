@@ -1,1 +1,0 @@
-https://kubernetes.io/docs/reference/kubectl/generated/kubectl_config/kubectl_config_current-context/
