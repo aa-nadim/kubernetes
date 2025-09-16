@@ -1332,7 +1332,34 @@ $ kubectl logs -f my-first-pod
 2025/09/16 17:10:40 [notice] 1#1: start worker process 43
 2025/09/16 17:10:40 [notice] 1#1: start worker process 44
 
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ docker ps
+CONTAINER ID   IMAGE                  COMMAND                  CREATED          STATUS          PORTS                       NAMES
+31666a0fa37d   kindest/node:v1.34.0   "/usr/local/bin/entr…"   49 minutes ago   Up 49 minutes   127.0.0.1:13916->6443/tcp   devops-ic-batch-04-control-plane
+9e7caea64f2a   kindest/node:v1.34.0   "/usr/local/bin/entr…"   49 minutes ago   Up 49 minutes                               devops-ic-batch-04-worker
+8f4d8a4e2991   kindest/node:v1.34.0   "/usr/local/bin/entr…"   49 minutes ago   Up 49 minutes                               devops-ic-batch-04-worker2
+b6b9103d7e7e   kindest/node:v1.34.0   "/usr/local/bin/entr…"   6 days ago       Up 56 minutes   127.0.0.1:12227->6443/tcp   devops-ic-control-plane
 
+User@nadim-os-windows MINGW64 ~/Desktop/Kubernetes (main)
+$ docker exec -it 9e7caea64f2a bash
+root@devops-ic-batch-04-worker:/# crictl images
+IMAGE                                           TAG                  IMAGE ID            SIZE
+docker.io/kindest/kindnetd                      v20250512-df8de77b   409467f978b4a       44.4MB
+docker.io/kindest/local-path-helper             v20241212-8ac705d0   baa0d31514ee5       3.08MB
+docker.io/kindest/local-path-provisioner        v20250214-acbabc1a   bbb6209cc873b       22.5MB
+docker.io/library/nginx                         1.14.2               295c7be079025       44.7MB
+registry.k8s.io/coredns/coredns                 v1.12.1              52546a367cc9e       22.4MB
+registry.k8s.io/etcd                            3.6.4-0              5f1f5298c888d       74.3MB
+registry.k8s.io/kube-apiserver-amd64            v1.34.0              90550c43ad2bc       89MB
+registry.k8s.io/kube-apiserver                  v1.34.0              90550c43ad2bc       89MB
+registry.k8s.io/kube-controller-manager-amd64   v1.34.0              a0af72f2ec6d6       76MB
+registry.k8s.io/kube-controller-manager         v1.34.0              a0af72f2ec6d6       76MB
+registry.k8s.io/kube-proxy-amd64                v1.34.0              df0860106674d       73.1MB
+registry.k8s.io/kube-proxy                      v1.34.0              df0860106674d       73.1MB
+registry.k8s.io/kube-scheduler-amd64            v1.34.0              46169d968e920       53.8MB
+registry.k8s.io/kube-scheduler                  v1.34.0              46169d968e920       53.8MB
+registry.k8s.io/pause                           3.10                 873ed75102791       320kB
+root@devops-ic-batch-04-worker:/#
 
 
 

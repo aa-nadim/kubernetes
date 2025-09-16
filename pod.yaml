@@ -1,10 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: my-first-pod       
-  labels: {}
-  annotations: {}
+  name: my-first-pod
 spec:
   containers:
-    - name: nginx
-      image: nginx
+  - name: nginx
+    image: nginx:1.14.2
+    resources:
+      requests:
+        cpu:  100m
+        memory: 256Mi
+
