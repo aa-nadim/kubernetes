@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels: {}
+  annotations: {}
+spec:
+  strategy:
+    # type: Recreate
+    type: RollingUpdate  # Recreate
+    rollingUpdate:
+      maxUnavailable: 23%
+      maxSurge: 50% # ceil(current pod * 50%) = extra number of pods
+  replicas: 3
+  selector:
+    matchLabels:         
+      app: nginx-deployment
+  template:
+    metadata:
+      labels:
+        app: nginx-deployment
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.28
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          env:
+          - name: APPLICATION_ENVIRONMENT
+            value: staging
+      restartPolicy: Always
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx-deployment
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 80
+      protocol: TCP
+
