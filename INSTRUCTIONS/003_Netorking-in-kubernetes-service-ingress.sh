@@ -68,3 +68,6 @@ kubectl describe svc nginx-service --namespace default
 kubectl get endpoints --namespace default
 
 <service-name>.<namespace>.svc.cluster.local
+
+# ================================
+apt update && apt install dns-utils # for dig

@@ -23,6 +23,9 @@ spec:
       containers:
         - name: nginx
           image: nginx:1.28
+          ports:
+            - containerPort: 80
+              name: http
           resources:
             requests:
               cpu: 100m
@@ -43,6 +46,6 @@ spec:
   ports:
     - name: http
       port: 8080
-      targetPort: 80
+      targetPort: http
       protocol: TCP
 
