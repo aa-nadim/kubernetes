@@ -9,7 +9,7 @@
 ## Services
 1. ClusterIP (default)
 2. NodePort (superset of ClusterIP)
-3. LoadBalancer (superset of NodePort)
+3. LoadBalancer (superset of NodePort) # METALLB
 4. ExternalName (superset of LoadBalancer)
 
 ## Questions
