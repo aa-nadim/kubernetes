@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels: {}
+  annotations: {}
+spec:
+  strategy:
+    # type: Recreate
+    type: RollingUpdate  # Recreate
+    rollingUpdate:
+      maxUnavailable: 23%
+      maxSurge: 50% # ceil(current pod * 50%) = extra number of pods
+  replicas: 3
+  selector:
+    matchLabels:         
+      app: nginx-deployment
+  template:
+    metadata:
+      labels:
+        app: nginx-deployment
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.28
+          ports:
+            - containerPort: 80
+              name: http
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          env:
+          - name: APPLICATION_ENVIRONMENT
+            value: staging
+      restartPolicy: Always
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx-deployment
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+      protocol: TCP
+  type: LoadBalancer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-app-ingress
+spec:
+  rules:
+    - host: example.com
+      http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: test
+            port:
+              number: 8080
