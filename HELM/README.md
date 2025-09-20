@@ -22,4 +22,7 @@
 mkdir charts
 
 helm create charts/flask-application
+
+helm template backend charts/flask-application
+helm template backend charts/flask-application > flask-application.yaml
 ```

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "flask-application.fullname" . }}
+  name: {{ include "flask-application.fullname" . | trunc 20 }}
   labels:
     {{- include "flask-application.labels" . | nindent 4 }}
 spec:
