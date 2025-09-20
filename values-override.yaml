@@ -1,0 +1,8 @@
+config:
+  LOG_LEVEL: debug
+
+
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
