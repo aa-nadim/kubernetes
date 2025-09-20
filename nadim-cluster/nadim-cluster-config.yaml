@@ -1,0 +1,40 @@
+# Kind cluster configuration for nadim-cluster
+# 1 Control Plane + 2 Worker Nodes
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: nadim-cluster
+nodes:
+  # Control plane node (master) - 1 node
+  - role: control-plane
+    image: kindest/node:v1.28.0
+    kubeadmConfigPatches:
+    - |
+      kind: InitConfiguration
+      nodeRegistration:
+        kubeletExtraArgs:
+          node-labels: "ingress-ready=true"
+    extraPortMappings:
+    # Allow local access to ingress controller
+    - containerPort: 80
+      hostPort: 80
+      protocol: TCP
+    - containerPort: 443
+      hostPort: 443
+      protocol: TCP
+
+  # Worker node 1
+  - role: worker
+    image: kindest/node:v1.28.0
+    labels:
+      worker-name: nadim-worker-node-01
+
+  # Worker node 2  
+  - role: worker
+    image: kindest/node:v1.28.0
+    labels:
+      worker-name: nadim-worker-node-02
+
+# Networking configuration
+networking:
+  podSubnet: "10.244.0.0/16"
+  serviceSubnet: "10.96.0.0/12"
