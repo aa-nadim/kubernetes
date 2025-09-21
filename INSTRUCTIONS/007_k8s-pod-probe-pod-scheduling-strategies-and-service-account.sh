@@ -55,3 +55,20 @@ kubectl label nodes  devops-ic-batch-04-worker2 memory-intensive=true
 
 helm uninstall backend
 helm upgrade --install backend charts/flask-application --set image.tag=1.28
+
+
+
+## taint and toleration in kubernetes
+kubectl taint node devops-ic-batch-04-worker2 app=backend:NoSchedule
+kubectl get pods --watch
+kubectl get pods --watch -o wide
+
+
+kubectl describe node devops-ic-batch-04-worker2
+
+
+kubectl taint node devops-ic-batch-04-worker2 app=backend:NoExecute
+
+# _ Nodeselector not available
+# _ Affinity available and matches
+# _ Taint tolerations matched
