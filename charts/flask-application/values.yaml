@@ -181,13 +181,13 @@ tolerations:
     operator: "Exists"
     effect: "NoExecute"
 
-affinity: {}
-  # nodeAffinity: 
-  #   requiredDuringSchedulingIgnoredDuringExecution: 
-  #     nodeSelectorTerms: 
-  #     - matchExpressions: 
-  #       - key: memory-intensive
-  #         operator: Exists
+affinity: 
+  nodeAffinity: 
+    requiredDuringSchedulingIgnoredDuringExecution: 
+      nodeSelectorTerms: 
+      - matchExpressions: 
+        - key: master
+          operator: Exists
   #   preferredDuringSchedulingIgnoredDuringExecution: 
   #     - weight: 100
   #       preference:
