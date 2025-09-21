@@ -184,14 +184,12 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution: 
       nodeSelectorTerms: 
       - matchExpressions: 
-        - key: cpu-intensive
-          operator: NotIn
-          values: ["true"]
         - key: memory-intensive
           operator: Exists
-    # requiredDuringSchedulingIgnoredDuringExecution: 
-    #   nodeSelectorTerms: 
-    #   - matchExpressions: 
-    #     - key: memory-intensive
-    #       operator: NotIn
-    #       values: ["true"]
+    preferredDuringSchedulingIgnoredDuringExecution: 
+      - weight: 100
+        preference:
+          matchExpressions:
+            - key: memory-intensive
+              operator: NotIn
+              values: ["true"]
