@@ -30,3 +30,14 @@ helm upgrade backend charts/flask-application
 
 
 kubectl get pods -w
+
+
+helm uninstall backend
+
+helm upgrade --install backend charts/flask-application --set image.tag=1.0.0
+
+
+helm upgrade --install backend charts/flask-application --set image.tag=1.28
+
+
+docker run --rm -it nginx sh
