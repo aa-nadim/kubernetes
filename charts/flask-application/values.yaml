@@ -173,10 +173,25 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
-nodeSelector:
-  cpu-intensive: "true"
-  # memory-intensive: "false"
+nodeSelector: {}
+  # cpu-intensive: "true"
+  # memory-intensive: "true"
 
 tolerations: []
 
-affinity: {}
+affinity: 
+  nodeAffinity: 
+    requiredDuringSchedulingIgnoredDuringExecution: 
+      nodeSelectorTerms: 
+      - matchExpressions: 
+        - key: cpu-intensive
+          operator: NotIn
+          values: ["true"]
+        - key: memory-intensive
+          operator: Exists
+    # requiredDuringSchedulingIgnoredDuringExecution: 
+    #   nodeSelectorTerms: 
+    #   - matchExpressions: 
+    #     - key: memory-intensive
+    #       operator: NotIn
+    #       values: ["true"]

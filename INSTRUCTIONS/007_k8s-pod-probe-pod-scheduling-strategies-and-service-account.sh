@@ -51,3 +51,7 @@ kubectl label nodes <node-name> memory-intensive=true
 
 kubectl label nodes  devops-ic-batch-04-worker cpu-intensive=true
 kubectl label nodes  devops-ic-batch-04-worker2 memory-intensive=true
+
+
+helm uninstall backend
+helm upgrade --install backend charts/flask-application --set image.tag=1.28
