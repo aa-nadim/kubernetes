@@ -41,3 +41,13 @@ helm upgrade --install backend charts/flask-application --set image.tag=1.28
 
 
 docker run --rm -it nginx sh
+
+kubectl describe pod backend-flask-applic-5fffc7d58f-kl4mg
+
+kubectl get nodes --show-labels
+
+kubectl label nodes <node-name> cpu-intensive=true
+kubectl label nodes <node-name> memory-intensive=true
+
+kubectl label nodes  devops-ic-batch-04-worker cpu-intensive=true
+kubectl label nodes  devops-ic-batch-04-worker2 memory-intensive=true

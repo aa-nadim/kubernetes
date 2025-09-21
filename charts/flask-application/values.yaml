@@ -146,9 +146,8 @@ livenessProbe:
   failureThreshold: 5
 
 readinessProbe:
-  exec:
-    command:
-      - 'ls /etc/nginx/nginx.conf'
+  tcpSocket:
+    port: 80
   initialDelaySeconds: 10
   periodSeconds: 5
   timeoutSeconds: 5
@@ -174,7 +173,9 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
-nodeSelector: {}
+nodeSelector:
+  cpu-intensive: "true"
+  # memory-intensive: "false"
 
 tolerations: []
 
