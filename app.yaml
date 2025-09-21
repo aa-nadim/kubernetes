@@ -42,7 +42,7 @@ metadata:
   name: app-service
 spec:
   selector:
-    app: 0rfiaz/flask-application:v7
+    app: a2nadim/flask-application:1.0.0
   ports:
     - name: http
       port: 8080

@@ -63,7 +63,7 @@ spec:
       serviceAccountName: backend-flask-application
       containers:
         - name: flask-application
-          image: "0rfiaz/flask-application:v7"
+          image: "a2nadim/flask-application:1.0.0"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
