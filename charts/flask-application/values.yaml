@@ -176,24 +176,22 @@ volumeMounts: []
 nodeSelector: {}
   # cpu-intensive: "true"
   # memory-intensive: "true"
-
 tolerations:
-  - key: "app"
-    operator: "Equal"
-    value: "backend"
+  - key: "node-role.kubernetes.io/control-plane"
+    operator: "Exists"
     effect: "NoExecute"
 
-affinity: 
-  nodeAffinity: 
-    requiredDuringSchedulingIgnoredDuringExecution: 
-      nodeSelectorTerms: 
-      - matchExpressions: 
-        - key: memory-intensive
-          operator: Exists
-    preferredDuringSchedulingIgnoredDuringExecution: 
-      - weight: 100
-        preference:
-          matchExpressions:
-            - key: memory-intensive
-              operator: NotIn
-              values: ["true"]
+affinity: {}
+  # nodeAffinity: 
+  #   requiredDuringSchedulingIgnoredDuringExecution: 
+  #     nodeSelectorTerms: 
+  #     - matchExpressions: 
+  #       - key: memory-intensive
+  #         operator: Exists
+  #   preferredDuringSchedulingIgnoredDuringExecution: 
+  #     - weight: 100
+  #       preference:
+  #         matchExpressions:
+  #           - key: memory-intensive
+  #             operator: NotIn
+  #             values: ["true"]

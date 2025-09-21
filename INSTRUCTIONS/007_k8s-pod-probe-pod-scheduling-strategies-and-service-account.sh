@@ -72,3 +72,7 @@ kubectl taint node devops-ic-batch-04-worker2 app=backend:NoExecute
 # _ Nodeselector not available
 # _ Affinity available and matches
 # _ Taint tolerations matched
+
+
+
+kubectl describe node devops-ic-batch-04-control-plane | grep Taint
